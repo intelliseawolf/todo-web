@@ -78,6 +78,7 @@ function getCheckboxListener(item) {
 function getDeleteBtnListner(item) {
   return function(){
     item.remove();
+    removeTask
     //remove from finished list
     item.domNode.parentNode.removeChild(item.domNode);
   }

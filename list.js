@@ -2,8 +2,8 @@ $ = function(_id) {
   return document.getElementById(_id);
 }
 _bind = function(func, that) {
-  return function() {
-    func.call(that)
+  return function(...args) {
+    func.call(that, ...args)
   }
 }
 
@@ -31,6 +31,7 @@ class TodoView {
 
   bind() {
     $("button-add-item").addEventListener('click', _bind(this.addBtnListner, this));
+    $("input-content").addEventListener('keypress',  _bind(this.onInputKeyPressListener, this));
     $("button-return").addEventListener('click', _bind(this.toggleView, this));
     $("button-view-finished").addEventListener('click', _bind(this.toggleView, this));
   }
@@ -59,6 +60,12 @@ class TodoView {
       var domItem = todoDomItem(item);
       this.todoListView.appendChild(domItem);
       this.todoInput.value = "";
+    }
+  }
+
+  onInputKeyPressListener(e) {
+    if (e.code === "Enter") {
+      this.addBtnListner();
     }
   }
 }
