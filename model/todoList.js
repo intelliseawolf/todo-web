@@ -10,6 +10,12 @@ class TodoList {
     this.saveToLS();
   }
 
+  removeTask(item) {
+    const index = this.list.findIndex((itemOfList) => itemOfList.content === item.content)
+    this.list.splice(index, 1);
+    this.saveToLS()
+  }
+
   loadFromLS() {
     //.container property and the functions need to be reset
     var plainList = JSON.parse(localStorage.getItem(this.name) || '[]');
